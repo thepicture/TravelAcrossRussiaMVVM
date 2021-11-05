@@ -35,9 +35,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,8 +65,42 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Country.cs">
+      <DependentUpon>TravelAcrossRussiaBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Hotel.cs">
+      <DependentUpon>TravelAcrossRussiaBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HotelComment.cs">
+      <DependentUpon>TravelAcrossRussiaBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HotelImage.cs">
+      <DependentUpon>TravelAcrossRussiaBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tour.cs">
+      <DependentUpon>TravelAcrossRussiaBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TravelAcrossRussiaBaseModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TravelAcrossRussiaBaseModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TravelAcrossRussiaBaseModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TravelAcrossRussiaBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TravelAcrossRussiaBaseModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TravelAcrossRussiaBaseModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Type.cs">
+      <DependentUpon>TravelAcrossRussiaBaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AddEditHotelViewModel.cs" />
     <Compile Include="ViewModels\HotelsViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ToursViewModel.cs" />
     <Compile Include="Views\AddEditHotelView.xaml.cs">
       <DependentUpon>AddEditHotelView.xaml</DependentUpon>
@@ -112,6 +155,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Models\TravelAcrossRussiaBaseModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TravelAcrossRussiaBaseModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\TravelAcrossRussiaBaseModel.edmx.diagram">
+      <DependentUpon>TravelAcrossRussiaBaseModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -122,10 +173,24 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\picture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\TravelAcrossRussiaBaseModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TravelAcrossRussiaBaseModel.Context.cs</LastGenOutput>
+      <DependentUpon>TravelAcrossRussiaBaseModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\TravelAcrossRussiaBaseModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TravelAcrossRussiaBaseModel.edmx</DependentUpon>
+      <LastGenOutput>TravelAcrossRussiaBaseModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

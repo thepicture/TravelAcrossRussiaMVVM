@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TravelAcrossRussiaMVVM.Views"
+             xmlns:local="clr-namespace:TravelAcrossRussiaMVVM.Views" xmlns:viewmodels="clr-namespace:TravelAcrossRussiaMVVM.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ToursViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Background="White">
     <Grid>
@@ -31,47 +31,85 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
                 <TextBlock Text="Введите текст для поиска:"></TextBlock>
-                <TextBox Width="200"></TextBox>
+                <TextBox Width="400"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
                 <TextBlock Text="Выберите тип:"></TextBlock>
-                <ComboBox Width="200"></ComboBox>
+                <ComboBox Width="400"
+                          Height="30"></ComboBox>
             </StackPanel>
             <CheckBox Content="Только актуальные туры"
                       HorizontalAlignment="Right"
-                      Width="200"></CheckBox>
+                      Width="400"
+                      VerticalContentAlignment="Center"></CheckBox>
         </StackPanel>
         <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                  ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                  Grid.Row="1"
+                  ItemsSource="{Binding ToursList}"
+                  BorderThickness="0">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"></WrapPanel>
+                    <WrapPanel Orientation="Horizontal"
+                               HorizontalAlignment="Center"></WrapPanel>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
+                    <Border Style="{StaticResource RoundBorder}">
                     <Grid Width="400"
                           Height="350">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="1*" />
-                            <RowDefinition Height="4*" />
                             <RowDefinition Height="2*" />
+                            <RowDefinition Height="7*" />
+                            <RowDefinition Height="auto" />
                             <RowDefinition Height="1*" />
                         </Grid.RowDefinitions>
+                            <Viewbox>
                         <TextBlock FontSize="30"
-                                   HorizontalAlignment="Center"></TextBlock>
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding Name}"
+                                   TextAlignment="Center"></TextBlock>
+                            </Viewbox>
                         <Image Stretch="UniformToFill"
-                               Grid.Row="1"></Image>
+                               Name="TourImage"
+                               Grid.Row="1"
+                               Height="200">
+                            <Image.Source>
+                                <Binding Path="ImagePreview">
+                                    <Binding.TargetNullValue>
+                                        <ImageSource>/Resources/picture.png</ImageSource>
+                                    </Binding.TargetNullValue>
+                                </Binding>
+                            </Image.Source>
+                        </Image>
                         <TextBlock FontSize="30"
                                    FontWeight="Bold"
                                    HorizontalAlignment="Center"
-                                   Grid.Row="2"></TextBlock>
+                                   Grid.Row="2"
+                                   Text="{Binding Price, StringFormat={}{0:F0} РУБ}"></TextBlock>
                         <TextBlock Grid.Row="3"
-                                   HorizontalAlignment="Left"></TextBlock>
+                                   HorizontalAlignment="Left">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="Актуален"></Setter>
+                                    <Setter Property="Foreground" Value="Green" />
+                                        <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsActual}" Value="False">
+                                            <Setter Property="Text" Value="Не актуален"></Setter>
+                                            <Setter Property="Foreground" Value="Red" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                         <TextBlock Grid.Row="3"
-                                   HorizontalAlignment="Right"></TextBlock>
+                                   Margin="0"
+                                   HorizontalAlignment="Right"
+                                   Text="{Binding TicketCount, StringFormat={}Билетов: {0}}"></TextBlock>
                     </Grid>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

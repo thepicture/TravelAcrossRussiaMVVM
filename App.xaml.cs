@@ -12,7 +12,7 @@ namespace TravelAcrossRussiaMVVM
         {
             MainWindow = new MainView
             {
-                DataContext = new ToursViewModel()
+                DataContext = new MainViewModel()
             };
             MainWindow.Show();
             base.OnStartup(e);
