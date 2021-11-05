@@ -20,7 +20,7 @@ namespace TravelAcrossRussiaMVVM.ViewModels
 
         public ToursViewModel(ViewModelNavigationStore viewModelNavigationStore)
         {
-            NavigateToHotelsControlCommand = new RelayCommand(param => viewModelNavigationStore.CurrentViewModel = new HotelsViewModel(viewModelNavigationStore));
+            NavigateToHotelsViewModelCommand = new RelayCommand(param => viewModelNavigationStore.CurrentViewModel = new HotelsViewModel(viewModelNavigationStore));
         }
 
         public ToursBaseEntities Context
@@ -153,7 +153,7 @@ namespace TravelAcrossRussiaMVVM.ViewModels
             }
         }
 
-        public RelayCommand NavigateToHotelsControlCommand { get; }
+        public RelayCommand NavigateToHotelsViewModelCommand { get; }
 
         private void FilterTours()
         {

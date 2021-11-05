@@ -20,12 +20,15 @@ namespace TravelAcrossRussiaMVVM.ViewModels
         private int _totalPagesShown = 1;
         public HotelsViewModel(ViewModelNavigationStore viewModelNavigationStore)
         {
-            NavigateToToursControlCommand = new RelayCommand(param => viewModelNavigationStore.CurrentViewModel = new ToursViewModel(viewModelNavigationStore));
+            NavigateToToursViewModelCommand = new RelayCommand(param => viewModelNavigationStore.CurrentViewModel = new ToursViewModel(viewModelNavigationStore));
+            NavigateToAddEditHotelViewModelCommand = new RelayCommand(param => viewModelNavigationStore.CurrentViewModel = new AddEditHotelViewModel(viewModelNavigationStore, param));
             UpdatePagination();
             UpdateTotalPages();
         }
 
-        public RelayCommand NavigateToToursControlCommand { get; }
+        public RelayCommand NavigateToToursViewModelCommand { get; }
+        public RelayCommand NavigateToAddEditHotelViewModelCommand { get; }
+
         public List<Hotel> HotelsList
         {
             get
