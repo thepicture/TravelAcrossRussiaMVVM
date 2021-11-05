@@ -5,8 +5,75 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TravelAcrossRussiaMVVM.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Background="White">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel HorizontalAlignment="Center">
+            <StackPanel.Resources>
+                <ResourceDictionary>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Margin" Value="10"></Setter>
+                    </Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Margin" Value="10"></Setter>
+                    </Style>
+                    <Style TargetType="ComboBox">
+                        <Setter Property="Margin" Value="10"></Setter>
+                    </Style>
+                    <Style TargetType="CheckBox">
+                        <Setter Property="Margin" Value="10"></Setter>
+                    </Style>
+                </ResourceDictionary>
+            </StackPanel.Resources>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <TextBlock Text="Введите текст для поиска:"></TextBlock>
+                <TextBox Width="200"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <TextBlock Text="Выберите тип:"></TextBlock>
+                <ComboBox Width="200"></ComboBox>
+            </StackPanel>
+            <CheckBox Content="Только актуальные туры"
+                      HorizontalAlignment="Right"
+                      Width="200"></CheckBox>
+        </StackPanel>
+        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="400"
+                          Height="350">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="4*" />
+                            <RowDefinition Height="2*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock FontSize="30"
+                                   HorizontalAlignment="Center"></TextBlock>
+                        <Image Stretch="UniformToFill"
+                               Grid.Row="1"></Image>
+                        <TextBlock FontSize="30"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"
+                                   Grid.Row="2"></TextBlock>
+                        <TextBlock Grid.Row="3"
+                                   HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock Grid.Row="3"
+                                   HorizontalAlignment="Right"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </UserControl>
