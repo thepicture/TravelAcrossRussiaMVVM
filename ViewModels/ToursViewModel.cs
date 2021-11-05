@@ -12,6 +12,7 @@ namespace TravelAcrossRussiaMVVM.ViewModels
         private List<Type> _typesOfTour;
         private Type _selectedTypeOfTour;
         private bool areOnlyActualTours = true;
+        private decimal _totalToursPrice;
 
         public ToursBaseEntities Context
         {
@@ -98,6 +99,15 @@ namespace TravelAcrossRussiaMVVM.ViewModels
             }
         }
 
+        public decimal TotalToursPrice
+        {
+            get => _totalToursPrice; set
+            {
+                _totalToursPrice = value;
+                OnPropertyChanged();
+            }
+        }
+
         private void FilterTours()
         {
             List<Tour> currentTours = Context.Tour.ToList();
@@ -117,7 +127,7 @@ namespace TravelAcrossRussiaMVVM.ViewModels
             {
                 currentTours = currentTours.Where(tour => tour.IsActual).ToList();
             }
-
+            TotalToursPrice = currentTours.Sum(tour => tour.Price * tour.TicketCount);
             ToursList = currentTours;
         }
     }

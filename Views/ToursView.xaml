@@ -9,9 +9,14 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel HorizontalAlignment="Center">
+        <TextBlock Text="{Binding TotalToursPrice, StringFormat={}Общая стоимость туров: {0:F0} РУБ}"
+                   HorizontalAlignment="Right"
+                   Style="{StaticResource CommonBlock}"></TextBlock>
+        <StackPanel HorizontalAlignment="Center"
+                    Grid.Row="1">
             <StackPanel.Resources>
                 <ResourceDictionary>
                     <Style TargetType="TextBlock">
@@ -55,7 +60,7 @@
         </StackPanel>
         <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                  Grid.Row="1"
+                  Grid.Row="2"
                   ItemsSource="{Binding ToursList}"
                   BorderThickness="0">
             <ListView.ItemsPanel>
