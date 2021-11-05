@@ -43,10 +43,12 @@
             <StackPanel Orientation="Horizontal">
                 <Button Content="&lt;&lt;"
                         Width="50"
-                        Command="{Binding PageFirstCommand}"></Button>
+                        Command="{Binding PageFirstCommand}"
+                        ToolTip="Перейти на первую страницу списка отелей"></Button>
                 <Button Content="&lt;"
                         Width="50"
-                        Command="{Binding PagePreviousCommand}"></Button>
+                        Command="{Binding PagePreviousCommand}"
+                        ToolTip="Перейти на предыдущую страницу списка отелей"></Button>
             </StackPanel>
             <TextBlock VerticalAlignment="Center">
                 <TextBlock.Inlines>
@@ -58,11 +60,14 @@
             </TextBlock>
             <Button Content="&gt;"
                     Width="50"
-                    Command="{Binding PageNextCommand}"></Button>
+                    Command="{Binding PageNextCommand}"
+                    ToolTip="Перейти на следующую страницу списка отелей"></Button>
             <Button Content="&gt;&gt;"
                     Width="50"
-                    Command="{Binding PageLastCommand}"></Button>
-            <TextBlock VerticalAlignment="Center">
+                    Command="{Binding PageLastCommand}"
+                    ToolTip="Перейти на последнюю страницу списка отелей"></Button>
+            <TextBlock VerticalAlignment="Center"
+                       ToolTip="Отображает выводимое количество записей на текущей странице и общее количество записей в базе данных">
                 <TextBlock.Inlines>
                     <Run Text="Выведено записей: "></Run>
                     <Run Text="{Binding ElementName=HotelsGrid, Path=Items.Count, Mode=OneWay, StringFormat={}{0};}"></Run>
@@ -75,10 +80,14 @@
                 <TextBlock Text="Отображать по"
                            VerticalAlignment="Center"></TextBlock>
                 <TextBox Width="50"
-                         Text="{Binding HotelsCountPerPage, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                         Text="{Binding HotelsCountPerPage, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="Введите натуральное число, которое будет определять максимальное выводимое количество элементов на каждой странице"></TextBox>
                 <TextBlock Text="элементов на странице"
                            VerticalAlignment="Center"></TextBlock>
             </StackPanel>
+            <Button Content="Перейти на страницу туров"
+                    Command="{Binding NavigateToToursControlCommand}"
+                    ToolTip="Нажмите, чтобы перейти с текущей страницы на страницу туров"></Button>
         </WrapPanel>
     </Grid>
 </UserControl>

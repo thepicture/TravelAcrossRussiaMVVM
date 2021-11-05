@@ -159,7 +159,9 @@ namespace TravelAcrossRussiaMVVM.ViewModels
 
         public int TotalPagesShown
         {
-            get => _totalPagesShown; set
+            get => _totalPagesShown;
+
+            set
             {
                 _totalPagesShown = value;
                 OnPropertyChanged();

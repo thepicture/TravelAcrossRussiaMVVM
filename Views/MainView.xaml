@@ -17,9 +17,9 @@
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition Height="6*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="6*"></RowDefinition>
+            <RowDefinition Height=".5*"></RowDefinition>
         </Grid.RowDefinitions>
         <Border Style="{StaticResource RoundBorder}"
                 Background="#bae3e8">
