@@ -35,7 +35,8 @@
             </StackPanel.Resources>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
-                <TextBlock Text="Введите текст для поиска:"></TextBlock>
+                <TextBlock Text="Введите текст для поиска:"
+                           VerticalAlignment="Center"></TextBlock>
                 <TextBox Width="400"
                          Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                          ToolTip="Введите поисковый запрос по имени или описанию тура">
@@ -43,12 +44,23 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
-                <TextBlock Text="Выберите тип:"></TextBlock>
+                <TextBlock Text="Выберите тип:"
+                           VerticalAlignment="Center"></TextBlock>
                 <ComboBox Width="400"
                           ItemsSource="{Binding TypesOfTour}"
                           DisplayMemberPath="Name"
                           SelectedItem="{Binding SelectedTypeOfTour}"
                           ToolTip="Выберите тип тура, по которому будет производиться поиск">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <TextBlock Text="Сортировка:"
+                           VerticalAlignment="Center"></TextBlock>
+                <ComboBox Width="400"
+                          ItemsSource="{Binding ToursOrderTypes}"
+                          SelectedItem="{Binding SelectedToursOrderType}"
+                          ToolTip="Выпадающий список позволяет отсортировать список по убыванию и возрастанию стоимости тура">
                 </ComboBox>
             </StackPanel>
             <CheckBox Content="Только актуальные туры"

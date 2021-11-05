@@ -13,6 +13,8 @@ namespace TravelAcrossRussiaMVVM.ViewModels
         private Type _selectedTypeOfTour;
         private bool areOnlyActualTours = true;
         private decimal _totalToursPrice;
+        private List<string> _toursOrderTypes;
+        private string _selectedToursOrderType;
 
         public ToursBaseEntities Context
         {
@@ -108,6 +110,42 @@ namespace TravelAcrossRussiaMVVM.ViewModels
             }
         }
 
+        public List<string> ToursOrderTypes
+        {
+            get
+            {
+                if (_toursOrderTypes == null)
+                {
+                    _toursOrderTypes = new List<string>
+                    {
+                        "Без сортировки",
+                        "По убыванию",
+                        "По возрастанию"
+                    };
+                }
+                SelectedToursOrderType = _toursOrderTypes.First();
+                return _toursOrderTypes;
+            }
+
+            set
+            {
+                _toursOrderTypes = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string SelectedToursOrderType
+        {
+            get => _selectedToursOrderType;
+
+            set
+            {
+                _selectedToursOrderType = value;
+                FilterTours();
+                OnPropertyChanged();
+            }
+        }
+
         private void FilterTours()
         {
             List<Tour> currentTours = Context.Tour.ToList();
@@ -126,6 +164,18 @@ namespace TravelAcrossRussiaMVVM.ViewModels
             if (areOnlyActualTours)
             {
                 currentTours = currentTours.Where(tour => tour.IsActual).ToList();
+            }
+            if (SelectedToursOrderType != "Без сортировки")
+            {
+                switch (SelectedToursOrderType)
+                {
+                    case "По убыванию":
+                        currentTours = currentTours.OrderByDescending(t => t.Price).ToList();
+                        break;
+                    case "По возрастанию":
+                        currentTours = currentTours.OrderBy(t => t.Price).ToList();
+                        break;
+                }
             }
             TotalToursPrice = currentTours.Sum(tour => tour.Price * tour.TicketCount);
             ToursList = currentTours;
