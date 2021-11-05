@@ -32,7 +32,9 @@
                         HorizontalAlignment="Right">
                 <TextBlock Text="Введите текст для поиска:"></TextBlock>
                 <TextBox Width="400"
-                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="Введите поисковый запрос по имени или описанию тура">
+                </TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
@@ -40,13 +42,16 @@
                 <ComboBox Width="400"
                           ItemsSource="{Binding TypesOfTour}"
                           DisplayMemberPath="Name"
-                          SelectedItem="{Binding SelectedTypeOfTour}"></ComboBox>
+                          SelectedItem="{Binding SelectedTypeOfTour}"
+                          ToolTip="Выберите тип тура, по которому будет производиться поиск">
+                </ComboBox>
             </StackPanel>
             <CheckBox Content="Только актуальные туры"
                       HorizontalAlignment="Right"
                       Width="400"
                       VerticalContentAlignment="Center"
-                      IsChecked="{Binding AreOnlyActualTours}"></CheckBox>
+                      IsChecked="{Binding AreOnlyActualTours}"
+                      ToolTip="Если стоит галочка, то в выборке результатов не будут присутствовать неактуальные туры"></CheckBox>
         </StackPanel>
         <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
