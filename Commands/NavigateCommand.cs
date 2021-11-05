@@ -13,7 +13,7 @@ namespace TravelAcrossRussiaMVVM.Commands
         {
             _viewModelNavigationStore = viewModelNavigationStore;
             _createViewModelFunc = createViewModelFunc;
-            new RelayCommand(() => _viewModelNavigationStore.CurrentViewModel = _createViewModelFunc()).Execute(null);
+            new RelayCommand(param => _viewModelNavigationStore.CurrentViewModel = _createViewModelFunc()).Execute(null);
         }
     }
 }
