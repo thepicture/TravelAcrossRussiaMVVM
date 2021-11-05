@@ -3,11 +3,11 @@
 namespace TravelAcrossRussiaMVVM
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainView.xaml
     /// </summary>
-    public partial class MainViewModel : Window
+    public partial class MainView : Window
     {
-        public MainViewModel()
+        public MainView()
         {
             InitializeComponent();
         }
