@@ -8,6 +8,10 @@ namespace TravelAcrossRussiaMVVM.ViewModels
     {
         private ToursBaseEntities _context;
         private List<Tour> _toursList;
+        private string _searchText;
+        private List<Type> _typesOfTour;
+        private Type _selectedTypeOfTour;
+        private bool areOnlyActualTours = true;
 
         public ToursBaseEntities Context
         {
@@ -38,6 +42,83 @@ namespace TravelAcrossRussiaMVVM.ViewModels
                 _toursList = value;
                 OnPropertyChanged();
             }
+        }
+
+        public string SearchText
+        {
+            get => _searchText; set
+            {
+                _searchText = value;
+                FilterTours();
+                OnPropertyChanged();
+            }
+        }
+        public List<Type> TypesOfTour
+        {
+            get
+            {
+                if (_typesOfTour == null)
+                {
+                    _typesOfTour = new List<Type>
+                    {
+                        new Type
+                        {
+                            Name = "Все типы"
+                        },
+                    };
+                    _typesOfTour.AddRange(Context.Type.ToList());
+                    SelectedTypeOfTour = _typesOfTour.First();
+                }
+                return _typesOfTour;
+            }
+
+            set
+            {
+                _typesOfTour = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool AreOnlyActualTours
+        {
+            get => areOnlyActualTours; set
+            {
+                areOnlyActualTours = value;
+                FilterTours();
+                OnPropertyChanged();
+            }
+        }
+
+        public Type SelectedTypeOfTour
+        {
+            get => _selectedTypeOfTour; set
+            {
+                _selectedTypeOfTour = value;
+                FilterTours();
+                OnPropertyChanged();
+            }
+        }
+
+        private void FilterTours()
+        {
+            List<Tour> currentTours = Context.Tour.ToList();
+            if (!string.IsNullOrWhiteSpace(SearchText))
+            {
+                currentTours = currentTours
+                    .Where(tour => tour.Name.ToLower().Contains(SearchText.ToLower()))
+                    .ToList();
+            }
+            if (SelectedTypeOfTour.Name != "Все типы")
+            {
+                currentTours = currentTours
+                    .Where(tour => tour.Type.Select(type => type.Id).Contains(SelectedTypeOfTour.Id))
+                    .ToList();
+            }
+            if (areOnlyActualTours)
+            {
+                currentTours = currentTours.Where(tour => tour.IsActual).ToList();
+            }
+
+            ToursList = currentTours;
         }
     }
 }

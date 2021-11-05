@@ -31,18 +31,22 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
                 <TextBlock Text="Введите текст для поиска:"></TextBlock>
-                <TextBox Width="400"></TextBox>
+                <TextBox Width="400"
+                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
                 <TextBlock Text="Выберите тип:"></TextBlock>
                 <ComboBox Width="400"
-                          Height="30"></ComboBox>
+                          ItemsSource="{Binding TypesOfTour}"
+                          DisplayMemberPath="Name"
+                          SelectedItem="{Binding SelectedTypeOfTour}"></ComboBox>
             </StackPanel>
             <CheckBox Content="Только актуальные туры"
                       HorizontalAlignment="Right"
                       Width="400"
-                      VerticalContentAlignment="Center"></CheckBox>
+                      VerticalContentAlignment="Center"
+                      IsChecked="{Binding AreOnlyActualTours}"></CheckBox>
         </StackPanel>
         <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
@@ -58,57 +62,59 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border Style="{StaticResource RoundBorder}">
-                    <Grid Width="400"
+                        <Grid Width="400"
                           Height="350">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="2*" />
-                            <RowDefinition Height="7*" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="1*" />
-                        </Grid.RowDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="7*" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
                             <Viewbox>
-                        <TextBlock FontSize="30"
+                                <TextBlock FontSize="30"
                                    HorizontalAlignment="Center"
                                    Text="{Binding Name}"
-                                   TextAlignment="Center"></TextBlock>
+                                   TextAlignment="Center"
+                                   Style="{StaticResource CommonBlock}"></TextBlock>
                             </Viewbox>
-                        <Image Stretch="UniformToFill"
+                            <Image Stretch="UniformToFill"
                                Name="TourImage"
                                Grid.Row="1"
                                Height="200">
-                            <Image.Source>
-                                <Binding Path="ImagePreview">
-                                    <Binding.TargetNullValue>
-                                        <ImageSource>/Resources/picture.png</ImageSource>
-                                    </Binding.TargetNullValue>
-                                </Binding>
-                            </Image.Source>
-                        </Image>
-                        <TextBlock FontSize="30"
+                                <Image.Source>
+                                    <Binding Path="ImagePreview">
+                                        <Binding.TargetNullValue>
+                                            <ImageSource>/Resources/picture.png</ImageSource>
+                                        </Binding.TargetNullValue>
+                                    </Binding>
+                                </Image.Source>
+                            </Image>
+                            <TextBlock FontSize="30"
                                    FontWeight="Bold"
                                    HorizontalAlignment="Center"
                                    Grid.Row="2"
+                                   Style="{StaticResource CommonBlock}"
                                    Text="{Binding Price, StringFormat={}{0:F0} РУБ}"></TextBlock>
-                        <TextBlock Grid.Row="3"
+                            <TextBlock Grid.Row="3"
                                    HorizontalAlignment="Left">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Text" Value="Актуален"></Setter>
-                                    <Setter Property="Foreground" Value="Green" />
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Text" Value="Актуален"></Setter>
+                                        <Setter Property="Foreground" Value="Green" />
                                         <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsActual}" Value="False">
-                                            <Setter Property="Text" Value="Не актуален"></Setter>
-                                            <Setter Property="Foreground" Value="Red" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                        <TextBlock Grid.Row="3"
+                                            <DataTrigger Binding="{Binding IsActual}" Value="False">
+                                                <Setter Property="Text" Value="Не актуален"></Setter>
+                                                <Setter Property="Foreground" Value="Red" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBlock Grid.Row="3"
                                    Margin="0"
                                    HorizontalAlignment="Right"
                                    Text="{Binding TicketCount, StringFormat={}Билетов: {0}}"></TextBlock>
-                    </Grid>
+                        </Grid>
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>

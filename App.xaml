@@ -9,7 +9,7 @@
             <Setter Property="Foreground" Value="#445c93" />
             <Setter Property="Margin" Value="20"></Setter>
         </Style>
-        <Style TargetType="TextBlock">
+        <Style TargetType="TextBlock" x:Key="CommonBlock">
             <Setter Property="Margin" Value="20" />
         </Style>
         <Style TargetType="Button">

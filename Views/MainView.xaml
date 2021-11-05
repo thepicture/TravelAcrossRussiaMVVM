@@ -25,6 +25,7 @@
         </Border>
         <Viewbox Stretch="Uniform">
             <TextBlock Text="Путешествуй по России"
+                       Style="{StaticResource CommonBlock}"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"></TextBlock>
         </Viewbox>
