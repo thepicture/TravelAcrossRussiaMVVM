@@ -1,12 +1,31 @@
-﻿namespace TravelAcrossRussiaMVVM.ViewModels
+﻿using TravelAcrossRussiaMVVM.Stores;
+
+namespace TravelAcrossRussiaMVVM.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public MainViewModel()
+        private ViewModelNavigationStore _viewModelNavigationStore;
+
+        public MainViewModel(ViewModelNavigationStore viewModelNavigationStore)
         {
-            CurrentViewModel = new ToursViewModel();
+            _viewModelNavigationStore = viewModelNavigationStore;
+            _viewModelNavigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         }
 
-        public ViewModelBase CurrentViewModel { get; set; }
+        public ViewModelBase CurrentViewModel => _viewModelNavigationStore.CurrentViewModel;
+
+        private void OnCurrentViewModelChanged()
+        {
+            OnPropertyChanged(nameof(CurrentViewModel));
+        }
+
+        public ViewModelNavigationStore ViewModelNavigationStore
+        {
+            get => _viewModelNavigationStore; set
+            {
+                _viewModelNavigationStore = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

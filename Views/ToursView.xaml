@@ -12,6 +12,9 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Button Content="Перейти на страницу списка отелей"
+                HorizontalAlignment="Left"
+                Command="{Binding NavigateToHotelsControlCommand}"></Button>
         <TextBlock Text="{Binding TotalToursPrice, StringFormat={}Общая стоимость туров: {0:F0} РУБ}"
                    HorizontalAlignment="Right"
                    Style="{StaticResource CommonBlock}"></TextBlock>

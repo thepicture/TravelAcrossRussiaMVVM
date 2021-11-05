@@ -65,6 +65,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Models\Country.cs">
       <DependentUpon>TravelAcrossRussiaBaseModel.tt</DependentUpon>
@@ -99,6 +100,7 @@
     <Compile Include="Models\Type.cs">
       <DependentUpon>TravelAcrossRussiaBaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Stores\ViewModelNavigationStore.cs" />
     <Compile Include="ViewModels\AddEditHotelViewModel.cs" />
     <Compile Include="ViewModels\HotelsViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

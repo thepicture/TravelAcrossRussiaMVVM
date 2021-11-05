@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using TravelAcrossRussiaMVVM.Stores;
 using TravelAcrossRussiaMVVM.ViewModels;
 
 namespace TravelAcrossRussiaMVVM
@@ -10,9 +11,11 @@ namespace TravelAcrossRussiaMVVM
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            ViewModelNavigationStore viewModelNavigationStore = new ViewModelNavigationStore();
+            viewModelNavigationStore.CurrentViewModel = new ToursViewModel(viewModelNavigationStore);
             MainWindow = new MainView
             {
-                DataContext = new MainViewModel()
+                DataContext = new MainViewModel(viewModelNavigationStore)
             };
             MainWindow.Show();
             base.OnStartup(e);

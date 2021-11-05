@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TravelAcrossRussiaMVVM.Commands;
 using TravelAcrossRussiaMVVM.Models;
+using TravelAcrossRussiaMVVM.Stores;
 
 namespace TravelAcrossRussiaMVVM.ViewModels
 {
@@ -15,6 +17,11 @@ namespace TravelAcrossRussiaMVVM.ViewModels
         private decimal _totalToursPrice;
         private List<string> _toursOrderTypes;
         private string _selectedToursOrderType;
+
+        public ToursViewModel(ViewModelNavigationStore viewModelNavigationStore)
+        {
+            NavigateToHotelsControlCommand = new RelayCommand(() => viewModelNavigationStore.CurrentViewModel = new HotelsViewModel(viewModelNavigationStore));
+        }
 
         public ToursBaseEntities Context
         {
@@ -145,6 +152,8 @@ namespace TravelAcrossRussiaMVVM.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public RelayCommand NavigateToHotelsControlCommand { get; }
 
         private void FilterTours()
         {
