@@ -25,5 +25,14 @@
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="20" />
         </Style>
+        <Style TargetType="Border" x:Key="RoundBorder">
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth=".3"></DropShadowEffect>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>

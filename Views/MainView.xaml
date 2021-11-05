@@ -3,12 +3,44 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TravelAcrossRussiaMVVM"
+        xmlns:viewmodels="clr-namespace:TravelAcrossRussiaMVVM.ViewModels"
+        xmlns:local="clr-namespace:TravelAcrossRussiaMVVM" xmlns:views="clr-namespace:TravelAcrossRussiaMVVM.Views"
         mc:Ignorable="d"
         Title="MainView" 
         Height="450" 
         Width="800"
+        MinHeight="450"
+        MinWidth="800"
         Style="{StaticResource GlobalStyle}">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="6*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Style="{StaticResource RoundBorder}"
+                Background="#bae3e8">
+        </Border>
+        <Viewbox Stretch="Uniform">
+            <TextBlock Text="Путешествуй по России"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"></TextBlock>
+        </Viewbox>
+        <ContentControl Grid.Row="1">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type viewmodels:ToursViewModel}">
+                    <views:ToursView></views:ToursView>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:HotelsViewModel}">
+                    <views:HotelsView></views:HotelsView>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:AddEditHotelViewModel}">
+                    <views:AddEditHotelView></views:AddEditHotelView>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+        <Border Style="{StaticResource RoundBorder}"
+                Background="#445c93"
+                Grid.Row="2"></Border>
     </Grid>
 </Window>
