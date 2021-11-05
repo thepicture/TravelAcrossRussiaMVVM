@@ -11,12 +11,13 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="6*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <DataGrid ItemsSource="{Binding HotelsList}"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
-                  ColumnWidth="*">
+                  ColumnWidth="*"
+                  Name="HotelsGrid">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название отеля"
                                     Binding="{Binding Name}"></DataGridTextColumn>
@@ -35,5 +36,44 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <WrapPanel Orientation="Horizontal"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="&lt;&lt;"
+                        Width="50"></Button>
+                <Button Content="&lt;"
+                        Width="50"></Button>
+            </StackPanel>
+            <TextBlock VerticalAlignment="Center">
+                <TextBlock.Inlines>
+                    <Run Text="страница"></Run>
+                    <Run Text="{Binding CurrentPage, FallbackValue=1}"></Run>
+                    <Run Text="из"></Run>
+                    <Run Text="{Binding TotalPages, FallbackValue=1}"></Run>
+                </TextBlock.Inlines>
+            </TextBlock>
+            <Button Content="&gt;"
+                    Width="50"></Button>
+            <Button Content="&gt;&gt;"
+                    Width="50"></Button>
+            <TextBlock VerticalAlignment="Center">
+                <TextBlock.Inlines>
+                    <Run Text="Выведено записей: "></Run>
+                    <Run Text="{Binding ElementName=HotelsGrid, Path=Items.Count, Mode=OneWay, StringFormat={}{0};}"></Run>
+                    <Run Text="всего записей:"></Run>
+                    <Run Text="{Binding HotelsList.Count, FallbackValue=0, Mode=OneWay, StringFormat={}{0};}"></Run>
+                </TextBlock.Inlines>
+            </TextBlock>
+            <StackPanel Orientation="Horizontal"
+                        Margin="20 0 0 0">
+                <TextBlock Text="Отображать по"
+                           VerticalAlignment="Center"></TextBlock>
+                <TextBox Width="50"></TextBox>
+                <TextBlock Text="элементов на странице"
+                           VerticalAlignment="Center"></TextBlock>
+            </StackPanel>
+        </WrapPanel>
     </Grid>
 </UserControl>
