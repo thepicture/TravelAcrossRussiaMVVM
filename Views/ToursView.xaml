@@ -79,6 +79,28 @@
                   Grid.Row="2"
                   ItemsSource="{Binding ToursList}"
                   BorderThickness="0">
+            <ListView.Style>
+                <Style TargetType="ListView">
+                    <Style.Triggers>
+                        <Trigger Property="HasItems" Value="False">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <TextBlock VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"
+                                                   Style="{StaticResource CommonBlock}">
+                                            <TextBlock.Inlines>
+                                                <Run Text="Ничего не найдено или база данных пуста."></Run>
+                                                <Run Text="Попробуйте ввести другой поисковый запрос"></Run>
+                                            </TextBlock.Inlines>
+                                        </TextBlock>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.Style>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal"
