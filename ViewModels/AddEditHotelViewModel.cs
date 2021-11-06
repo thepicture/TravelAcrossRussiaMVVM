@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
 using TravelAcrossRussiaMVVM.Commands;
 using TravelAcrossRussiaMVVM.Models;
 using TravelAcrossRussiaMVVM.Stores;
@@ -18,6 +15,7 @@ namespace TravelAcrossRussiaMVVM.ViewModels
         private Hotel _currentHotel;
         private List<Country> _countriesList;
         private string _userFeedback;
+        private RelayCommand _closeFeedbackCommand;
 
         public AddEditHotelViewModel(ViewModelNavigationStore viewModelNavigationStore, object hotel)
         {
@@ -111,6 +109,18 @@ namespace TravelAcrossRussiaMVVM.ViewModels
             {
                 _userFeedback = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public RelayCommand CloseFeedbackCommand
+        {
+            get
+            {
+                if (_closeFeedbackCommand == null)
+                {
+                    _closeFeedbackCommand = new RelayCommand(param => UserFeedback = string.Empty);
+                }
+                return _closeFeedbackCommand;
             }
         }
 

@@ -10,17 +10,22 @@
              Background="White">
     <Grid>
         <Grid Panel.ZIndex="1"
+              IsHitTestVisible="{Binding UserFeedback.Length, FallbackValue=False}"
               Opacity="{Binding UserFeedback.Length, FallbackValue=0}">
             <Grid Background="Gray" Opacity=".3"></Grid>
-            <Border Style="{StaticResource RoundBorder}"
-                    Height="100"
-                    Margin="20">
                 <Viewbox>
+            <Border Style="{StaticResource RoundBorder}"
+                    Margin="20">
+                    <UniformGrid Rows="2">
                     <TextBlock Text="{Binding UserFeedback}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"></TextBlock>
-                </Viewbox>
+                    <Button Content="Закрыть модальное окно"
+                            ToolTip="Закрывает текущее модальное окно с информацией о сохранении отеля"
+                            Command="{Binding CloseFeedbackCommand}"></Button>
+                    </UniformGrid>
             </Border>
+                </Viewbox>
         </Grid>
         <Border Style="{StaticResource RoundBorder}">
             <Viewbox>
@@ -60,7 +65,8 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center">
-                        <Button Content="Сохранить"></Button>
+                        <Button Content="Сохранить"
+                                Command="{Binding SaveCommand}"></Button>
                         <Button Content="Вернуться на страницу отелей"
                                 Command="{Binding NavigateToHotelsViewModelCommand}"></Button>
                     </StackPanel>
