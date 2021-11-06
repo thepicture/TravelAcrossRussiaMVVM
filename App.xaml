@@ -14,7 +14,7 @@
         </Style>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="20" />
-            <Setter Property="Background" Value="#bae3e8" />
+            <Setter Property="Background" Value="#fac716" />
         </Style>
         <Style TargetType="ComboBox">
             <Setter Property="Margin" Value="20" />

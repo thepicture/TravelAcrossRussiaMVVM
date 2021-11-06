@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using TravelAcrossRussiaMVVM.Commands;
 using TravelAcrossRussiaMVVM.Models;
 using TravelAcrossRussiaMVVM.Stores;
@@ -126,6 +127,10 @@ namespace TravelAcrossRussiaMVVM.ViewModels
 
         private void SaveChanges()
         {
+            if (HasAnyErrors())
+            {
+                return;
+            }
             if (CurrentHotel.Id == 0)
             {
                 _ = Context.Hotel.Add(CurrentHotel);
@@ -140,6 +145,25 @@ namespace TravelAcrossRussiaMVVM.ViewModels
                 UserFeedback = $"Не удалось {(CurrentHotel.Id == 0 ? "добавить" : "отредактировать")} отель. " +
                     $"Пожалуйста, попробуйте ещё раз. Ошибка: " + ex.Message;
             }
+        }
+
+        private bool HasAnyErrors()
+        {
+            StringBuilder errorsBuilder = new StringBuilder();
+            if (string.IsNullOrWhiteSpace(CurrentHotel.Name))
+            {
+                _ = errorsBuilder.AppendLine("Наименование отеля обязательно для заполнения");
+            }
+            if (CurrentHotel.Country is null)
+            {
+                _ = errorsBuilder.AppendLine("Необходимо указать страну отеля");
+            }
+            if (errorsBuilder.Length > 0)
+            {
+                UserFeedback = errorsBuilder.ToString();
+                return true;
+            }
+            return false;
         }
     }
 }

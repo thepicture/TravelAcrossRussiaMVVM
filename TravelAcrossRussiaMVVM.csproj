@@ -79,6 +79,7 @@
     <Compile Include="Models\HotelImage.cs">
       <DependentUpon>TravelAcrossRussiaBaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IntegerTextBox.cs" />
     <Compile Include="Models\Tour.cs">
       <DependentUpon>TravelAcrossRussiaBaseModel.tt</DependentUpon>
     </Compile>

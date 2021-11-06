@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TravelAcrossRussiaMVVM.Views" xmlns:viewmodels="clr-namespace:TravelAcrossRussiaMVVM.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AddEditHotelViewModel}"
+             xmlns:local="clr-namespace:TravelAcrossRussiaMVVM.Views" xmlns:viewmodels="clr-namespace:TravelAcrossRussiaMVVM.ViewModels" xmlns:models="clr-namespace:TravelAcrossRussiaMVVM.Models" d:DataContext="{d:DesignInstance Type=viewmodels:AddEditHotelViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" 
              d:DesignWidth="800"
@@ -30,45 +30,54 @@
         <Border Style="{StaticResource RoundBorder}">
             <Viewbox>
                 <StackPanel HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
+                            VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Right">
+                                HorizontalAlignment="Right">
                         <TextBlock Text="Наименование отеля"
-                               VerticalAlignment="Center"></TextBlock>
+                                   VerticalAlignment="Center"></TextBlock>
                         <TextBox Text="{Binding CurrentHotel.Name}"
-                             Width="400"></TextBox>
+                                 Width="400"
+                                 ToolTip="Введите наименование отеля"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Right">
+                                HorizontalAlignment="Right">
                         <TextBlock Text="Количество звезд"
-                               VerticalAlignment="Center"></TextBlock>
-                        <TextBox Text="{Binding CurrentHotel.CountOfStars}"
-                             Width="400"></TextBox>
+                                   VerticalAlignment="Center"></TextBlock>
+                        <models:IntegerTextBox Text="{Binding CurrentHotel.CountOfStars}"
+                                 Width="400"
+                                 MaxLength="1"
+                                 Margin="20"
+                                 InputScope="Number"
+                                 ToolTip="Введите число от 0 до 5"></models:IntegerTextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Right">
+                                HorizontalAlignment="Right">
                         <TextBlock Text="Описание отеля"
-                               VerticalAlignment="Center"></TextBlock>
+                                   VerticalAlignment="Center"></TextBlock>
                         <TextBox Text="{Binding CurrentHotel.Description}"
-                             Width="400"
-                             TextWrapping="Wrap"
-                              Height="100"></TextBox>
+                                 Width="400"
+                                 TextWrapping="Wrap"
+                                 Height="100"
+                                 ToolTip="Введите описание отеля"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Right">
+                                HorizontalAlignment="Right">
                         <TextBlock Text="Страна"
-                               VerticalAlignment="Center"></TextBlock>
+                                   VerticalAlignment="Center"></TextBlock>
                         <ComboBox ItemsSource="{Binding CountriesList}"
                                   SelectedItem="{Binding CurrentHotel.Country}"
                                   Width="400"
-                                  DisplayMemberPath="Name"></ComboBox>
+                                  DisplayMemberPath="Name"
+                                  ToolTip="Укажите страну отеля"></ComboBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center">
+                                HorizontalAlignment="Center">
                         <Button Content="Сохранить"
-                                Command="{Binding SaveCommand}"></Button>
+                                Command="{Binding SaveCommand}"
+                                ToolTip="Сохранить изменения, произведённые с текущим отелем"></Button>
                         <Button Content="Вернуться на страницу отелей"
-                                Command="{Binding NavigateToHotelsViewModelCommand}"></Button>
+                                Command="{Binding NavigateToHotelsViewModelCommand}"
+                                ToolTip="Вернуться на страницу списка отелей"></Button>
                     </StackPanel>
                 </StackPanel>
             </Viewbox>
