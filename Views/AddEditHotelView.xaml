@@ -9,24 +9,9 @@
              d:DesignWidth="800"
              Background="White">
     <Grid>
-        <Grid Panel.ZIndex="1"
-              IsHitTestVisible="{Binding UserFeedback.Length, FallbackValue=False}"
-              Opacity="{Binding UserFeedback.Length, FallbackValue=0}">
-            <Grid Background="Gray" Opacity=".3"></Grid>
-                <Viewbox>
-            <Border Style="{StaticResource RoundBorder}"
-                    Margin="20">
-                    <UniformGrid Rows="2">
-                    <TextBlock Text="{Binding UserFeedback}"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"></TextBlock>
-                    <Button Content="Закрыть модальное окно"
-                            ToolTip="Закрывает текущее модальное окно с информацией о сохранении отеля"
-                            Command="{Binding CloseFeedbackCommand}"></Button>
-                    </UniformGrid>
-            </Border>
-                </Viewbox>
-        </Grid>
+        <local:UserFeedbackControlView Panel.ZIndex="1"
+                                       IsHitTestVisible="{Binding UserFeedback.Length, FallbackValue=False}"
+                                       Opacity="{Binding UserFeedback.Length, FallbackValue=0}"></local:UserFeedbackControlView>
         <Border Style="{StaticResource RoundBorder}">
             <Viewbox>
                 <StackPanel HorizontalAlignment="Center"

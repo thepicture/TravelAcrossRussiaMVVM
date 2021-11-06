@@ -115,6 +115,9 @@
     <Compile Include="Views\ToursView.xaml.cs">
       <DependentUpon>ToursView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserFeedbackControlView.xaml.cs">
+      <DependentUpon>UserFeedbackControlView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\AddEditHotelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,6 +140,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\ToursView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserFeedbackControlView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

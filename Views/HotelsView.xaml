@@ -13,6 +13,7 @@
             <RowDefinition Height="6*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
+        
         <DataGrid ItemsSource="{Binding HotelsList}"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
@@ -31,8 +32,18 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Редактировать"
+                                    ToolTip="Редактировать отель, связанный с текущей строкой"
                                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridRow}, Path=DataContext}"
                                     Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=DataContext.NavigateToAddEditHotelViewModelCommand}"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Удалить"
+                                    ToolTip="Удалить отель, связанный с текущей строкой"
+                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=DataContext.DeleteHotelCommand}"></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

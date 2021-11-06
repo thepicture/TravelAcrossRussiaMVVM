@@ -8,13 +8,13 @@
         xmlns:views="clr-namespace:TravelAcrossRussiaMVVM.Views" 
         d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
-        Title="MainView" 
         Height="850" 
         Width="1200"
         MinHeight="850"
         MinWidth="1200"
         Style="{StaticResource GlobalStyle}"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Title="{Binding CurrentViewModel.Title}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>

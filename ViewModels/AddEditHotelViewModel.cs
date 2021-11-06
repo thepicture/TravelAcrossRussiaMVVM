@@ -15,17 +15,6 @@ namespace TravelAcrossRussiaMVVM.ViewModels
         private ToursBaseEntities _context;
         private Hotel _currentHotel;
         private List<Country> _countriesList;
-        private string _userFeedback;
-        private RelayCommand _closeFeedbackCommand;
-
-        public AddEditHotelViewModel(ViewModelNavigationStore viewModelNavigationStore, object hotel)
-        {
-            NavigateToHotelsViewModelCommand = new RelayCommand(param => viewModelNavigationStore.CurrentViewModel = new HotelsViewModel(viewModelNavigationStore));
-            if (hotel != null)
-            {
-                CurrentHotel = Context.Hotel.Find((hotel as Hotel).Id);
-            }
-        }
 
         public ToursBaseEntities Context
         {
@@ -102,26 +91,14 @@ namespace TravelAcrossRussiaMVVM.ViewModels
             }
         }
 
-        public string UserFeedback
+        public AddEditHotelViewModel(ViewModelNavigationStore viewModelNavigationStore, object hotel)
         {
-            get => _userFeedback;
-
-            set
+            NavigateToHotelsViewModelCommand = new RelayCommand(param => viewModelNavigationStore.CurrentViewModel = new HotelsViewModel(viewModelNavigationStore));
+            Title = $"Добавление нового отеля";
+            if (hotel != null)
             {
-                _userFeedback = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public RelayCommand CloseFeedbackCommand
-        {
-            get
-            {
-                if (_closeFeedbackCommand == null)
-                {
-                    _closeFeedbackCommand = new RelayCommand(param => UserFeedback = string.Empty);
-                }
-                return _closeFeedbackCommand;
+                CurrentHotel = Context.Hotel.Find((hotel as Hotel).Id);
+                Title = $"Редактирование отеля {CurrentHotel.Name}";
             }
         }
 
@@ -157,6 +134,10 @@ namespace TravelAcrossRussiaMVVM.ViewModels
             if (CurrentHotel.Country is null)
             {
                 _ = errorsBuilder.AppendLine("Необходимо указать страну отеля");
+            }
+            if (string.IsNullOrWhiteSpace(CurrentHotel.Description))
+            {
+                _ = errorsBuilder.AppendLine("Описание отеля обязательно для заполнения");
             }
             if (errorsBuilder.Length > 0)
             {

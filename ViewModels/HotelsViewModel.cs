@@ -15,16 +15,10 @@ namespace TravelAcrossRussiaMVVM.ViewModels
         private RelayCommand _pagePreviousCommand;
         private RelayCommand _pageNextCommand;
         private RelayCommand _pageLastCommand;
+        private RelayCommand _deleteHotelCommand;
         private int _hotelsCountPerPage = 10;
         private int _currentPage = 1;
         private int _totalPagesShown = 1;
-        public HotelsViewModel(ViewModelNavigationStore viewModelNavigationStore)
-        {
-            NavigateToToursViewModelCommand = new RelayCommand(param => viewModelNavigationStore.CurrentViewModel = new ToursViewModel(viewModelNavigationStore));
-            NavigateToAddEditHotelViewModelCommand = new RelayCommand(param => viewModelNavigationStore.CurrentViewModel = new AddEditHotelViewModel(viewModelNavigationStore, param));
-            UpdatePagination();
-            UpdateTotalPages();
-        }
 
         public RelayCommand NavigateToToursViewModelCommand { get; }
         public RelayCommand NavigateToAddEditHotelViewModelCommand { get; }
@@ -128,20 +122,6 @@ namespace TravelAcrossRussiaMVVM.ViewModels
             }
         }
 
-        private void UpdatePagination()
-        {
-            HotelsList = Context.Hotel
-                .ToList()
-                .Skip((CurrentPage - 1) * HotelsCountPerPage)
-                .Take(HotelsCountPerPage)
-                .ToList();
-        }
-
-        private void UpdateTotalPages()
-        {
-            TotalPagesShown = Convert.ToInt32(Math.Ceiling(Context.Hotel.ToList().Count * 1.0 / HotelsCountPerPage));
-        }
-
         public int CurrentPage
         {
             get => _currentPage; set
@@ -168,6 +148,49 @@ namespace TravelAcrossRussiaMVVM.ViewModels
             {
                 _totalPagesShown = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public RelayCommand DeleteHotelCommand
+        {
+            get
+            {
+                if (_deleteHotelCommand == null)
+                {
+                    _deleteHotelCommand = new RelayCommand(param => DeleteHotel(param as Hotel));
+                }
+                return _deleteHotelCommand;
+            }
+        }
+
+        public HotelsViewModel(ViewModelNavigationStore viewModelNavigationStore)
+        {
+            NavigateToToursViewModelCommand = new RelayCommand(param => viewModelNavigationStore.CurrentViewModel = new ToursViewModel(viewModelNavigationStore));
+            NavigateToAddEditHotelViewModelCommand = new RelayCommand(param => viewModelNavigationStore.CurrentViewModel = new AddEditHotelViewModel(viewModelNavigationStore, param));
+            UpdatePagination();
+            UpdateTotalPages();
+            Title = "Список отелей";
+        }
+
+        private void UpdatePagination()
+        {
+            HotelsList = Context.Hotel
+                .ToList()
+                .Skip((CurrentPage - 1) * HotelsCountPerPage)
+                .Take(HotelsCountPerPage)
+                .ToList();
+        }
+
+        private void UpdateTotalPages()
+        {
+            TotalPagesShown = Convert.ToInt32(Math.Ceiling(Context.Hotel.ToList().Count * 1.0 / HotelsCountPerPage));
+        }
+
+        private void DeleteHotel(Hotel hotel)
+        {
+            if (hotel.Tour.Any(tour => tour.IsActual))
+            {
+
             }
         }
     }
