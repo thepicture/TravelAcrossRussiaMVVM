@@ -14,7 +14,8 @@
         </Grid.RowDefinitions>
         <Button Content="Перейти на страницу списка отелей"
                 HorizontalAlignment="Left"
-                Command="{Binding NavigateToHotelsViewModelCommand}"></Button>
+                Command="{Binding NavigateToHotelsViewModelCommand}"
+                ToolTip="Перейти на страницу представления списка отелей"></Button>
         <TextBlock Text="{Binding TotalToursPrice, StringFormat={}Общая стоимость туров: {0:F0} РУБ}"
                    HorizontalAlignment="Right"
                    Style="{StaticResource CommonBlock}"></TextBlock>

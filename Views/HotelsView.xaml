@@ -90,6 +90,9 @@
             <Button Content="Перейти на страницу туров"
                     Command="{Binding NavigateToToursViewModelCommand}"
                     ToolTip="Нажмите, чтобы перейти с текущей страницы на страницу туров"></Button>
+            <Button Content="Добавить отель"
+                    Command="{Binding NavigateToAddEditHotelViewModelCommand}"
+                    ToolTip="Нажмите, чтобы добавить новый отель в базу данных"></Button>
         </WrapPanel>
     </Grid>
 </UserControl>
