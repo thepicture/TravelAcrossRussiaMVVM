@@ -24,6 +24,13 @@
         <Border Style="{StaticResource RoundBorder}"
                 Background="#bae3e8">
         </Border>
+        <Viewbox HorizontalAlignment="Left" Margin="40 20 20 20">
+            <Ellipse Stretch="UniformToFill" Width="50">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="/Resources/test_logo_unoriginal.png"></ImageBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+        </Viewbox>
         <Viewbox Stretch="Uniform">
             <TextBlock Text="Путешествуй по России"
                        Style="{StaticResource CommonBlock}"
