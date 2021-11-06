@@ -13,7 +13,9 @@
             <RowDefinition Height="6*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        
+        <local:UserFeedbackControlView Panel.ZIndex="1"
+                                       IsHitTestVisible="{Binding UserFeedback.Length, FallbackValue=False}"
+                                       Opacity="{Binding UserFeedback.Length, FallbackValue=0}"></local:UserFeedbackControlView>
         <DataGrid ItemsSource="{Binding HotelsList}"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
@@ -43,6 +45,7 @@
                         <DataTemplate>
                             <Button Content="Удалить"
                                     ToolTip="Удалить отель, связанный с текущей строкой"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridRow}, Path=DataContext}"
                                     Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=DataContext.DeleteHotelCommand}"></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

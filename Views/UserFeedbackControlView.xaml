@@ -15,9 +15,40 @@
                     <TextBlock Text="{Binding UserFeedback}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"></TextBlock>
-                    <Button Content="Закрыть модальное окно"
+                    <Grid>
+                        <Button Content="Закрыть модальное окно"
                             ToolTip="Закрывает текущее модальное окно с информацией"
+                            Command="{Binding CloseFeedbackCommand}">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsInChoiceMode}" Value="True">
+                                            <Setter Property="Visibility" Value="Hidden"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <UniformGrid Columns="2">
+                            <UniformGrid.Style>
+                                <Style TargetType="UniformGrid">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsInChoiceMode}" Value="False">
+                                            <Setter Property="Visibility" Value="Hidden"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </UniformGrid.Style>
+                            <Button Content="Да"
+                            ToolTip="Подтвердить действие"
+                            CommandParameter="True"
                             Command="{Binding CloseFeedbackCommand}"></Button>
+                            <Button Content="Нет"
+                            ToolTip="Отменить действие"
+                            CommandParameter="False"
+                            Command="{Binding CloseFeedbackCommand}"></Button>
+                        </UniformGrid>
+                    </Grid>
                 </UniformGrid>
             </Border>
         </Viewbox>

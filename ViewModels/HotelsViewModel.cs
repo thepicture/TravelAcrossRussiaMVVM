@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TravelAcrossRussiaMVVM.Commands;
 using TravelAcrossRussiaMVVM.Models;
 using TravelAcrossRussiaMVVM.Stores;
@@ -186,12 +187,43 @@ namespace TravelAcrossRussiaMVVM.ViewModels
             TotalPagesShown = Convert.ToInt32(Math.Ceiling(Context.Hotel.ToList().Count * 1.0 / HotelsCountPerPage));
         }
 
-        private void DeleteHotel(Hotel hotel)
+        private async void DeleteHotel(Hotel hotel)
         {
             if (hotel.Tour.Any(tour => tour.IsActual))
             {
-
+                UserFeedback = $"Удаление запрещено системой, " +
+                    $"отель {hotel.Name} находится " +
+                    $"в числе подходящих отелей для актуальных туров.";
+                return;
             }
+            IsInChoiceMode = true;
+            UserFeedback = $"Вы действительно хотите удалить {hotel.Name}?";
+            while (UserChoice is null)
+            {
+                await Task.Delay(100);
+            }
+            if (UserChoice == true)
+            {
+                hotel.HotelImage.Clear();
+                Context.Hotel.Remove(hotel);
+                try
+                {
+                    Context.SaveChanges();
+                    UserFeedback = $"Отель {hotel.Name} успешно удалён!";
+                }
+                catch (Exception ex)
+                {
+                    UserFeedback = $"Отель {hotel.Name} не был удалён! " +
+                        $"Пожалуйста, попробуйте ещё раз. Ошибка: {ex.Message}";
+                }
+            }
+            else
+            {
+                UserFeedback = $"Удаление отеля {hotel.Name} отменено!";
+            }
+            UserChoice = null;
+            IsInChoiceMode = false;
+            UpdatePagination();
         }
     }
 }
